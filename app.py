@@ -12,7 +12,7 @@ def get_binary_file_downloader_html(df):
      return href
 
 st.title("Heart Disease Predictor")
-tab1, tab2, tab3= st.tabs(['Predict', 'Bulk Predict', 'Model Information'])
+tab1, tab2= st.tabs(['Predict', 'Bulk Predict'])
 
 with tab1:
    age= st.number_input("Age (years)", min_value=0, max_value=150)
@@ -37,23 +37,23 @@ st_slope= ["Upsloping", "Flat", "Downsloping"].index(st_slope)
 
 #Create a Dataframe with user inputs
 input_data = pd.DataFrame({
-'age': [age],
-'sex': [sex],
-'chest_pain': [chest_pain],
-'resting_bp': [resting_bp],
-'cholesterol': [cholesterol],
-'fasting_bs': [fasting_bs],
-'resting _ecg': [resting_ecg],
-'max_hr': [max_hr],
-'exercise_angina': [exercise_angina],
-'oldpeak': [oldpeak],
-'st_slope': [st_slope]
+'Age': [age],
+'Sex': [sex],
+'ChestPainType': [chest_pain],
+'RestingBP': [resting_bp],
+'Cholesterol': [cholesterol],
+'FastingBS': [fasting_bs],
+'RestingECG': [resting_ecg],
+'MaxHR': [max_hr],
+'ExerciseAngina': [exercise_angina],
+'Oldpeak': [oldpeak],
+'ST_Slope': [st_slope]
 })
 
 
 
-algonames= ['Decision Trees', 'Logistic Regression', 'Random Forest', 'Support Vector Machine', 'GridRandom']
-modelnames= ['tree.pkl', 'LogisticRegression.pkl', 'Random Forest.pk1', 'SVM.pkl','gridrf.pkl']
+algonames= ['Decision Trees', 'Logistic Regression', 'Random Forest', 'Support Vector Machine']
+modelnames= ['tree.pkl', 'LogisticR.pkl', 'Random.pkl', 'SVM.pkl']
 
 predictions=[]
 def predict_heart_disease(data):
@@ -83,7 +83,6 @@ if st.button("Submit"):
 with tab2:
    st.title("Upload CSV File")
 
-   st.subheader('Instructions to note before uploading the file')
 
 #Create a file uploader in the sidebar
 uploaded_file= st.file_uploader("Upload a CSV file", type=["csv"])
@@ -91,7 +90,7 @@ uploaded_file= st.file_uploader("Upload a CSV file", type=["csv"])
 if uploaded_file is not None:
      #Read the uploaded CSV file into a DataFrame
      input_data= pd.read_csv(uploaded_file)
-     model =pickle.load(open('LogisticRegression.pkl', 'rb'))
+     model =pickle.load(open('LogisticR.pkl', 'rb'))
 
      expected_columns=['Age', 'Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS', 'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope']
 
