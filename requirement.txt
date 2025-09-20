@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+pickle
+base64
+warning
+scikit-learn
